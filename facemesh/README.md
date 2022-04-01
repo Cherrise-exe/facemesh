@@ -17,7 +17,7 @@ TensorFlow.JS
 Install dependencies - DONE
 Import dependencies - DONE
 Setup webcam and canvas - DONE
-Define references to those
+Define references for webcam - DONE
 Load facemesh
 Detect function
 Drawing utilities
