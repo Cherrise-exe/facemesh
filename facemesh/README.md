@@ -18,8 +18,8 @@ Install dependencies - DONE
 Import dependencies - DONE
 Setup webcam and canvas - DONE
 Define references for webcam - DONE
-Load facemesh
-Detect function
+Load facemesh - DONE
+Detect function - DONE
 Drawing utilities
 Load triangulation
 Setup triangle path
