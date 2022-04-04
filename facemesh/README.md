@@ -14,17 +14,17 @@ Facial landmark recognition allows you to detect a number of different points on
 
 ## Notes 
 
-Install dependencies - DONE
-Import dependencies - DONE
-Setup webcam and canvas - DONE
-Define references for webcam - DONE
-Load facemesh - DONE
-Detect function - DONE
-Drawing utilities - DONE
-Load triangulation - DONE
-Setup triangle path - DONE
-Setup point drawing - DONE
-Add drawMesh to detect function - DONE
+1. Install dependencies - DONE
+2. Import dependencies - DONE
+3. Setup webcam and canvas - DONE
+4. Define references for webcam - DONE
+5. Load facemesh - DONE
+6. Detect function - DONE
+7. Drawing utilities - DONE
+8. Load triangulation - DONE
+9. Setup triangle path - DONE
+10. Setup point drawing - DONE
+11. Add drawMesh to detect function - DONE
 
 # Getting Started with Create React App
 
