@@ -20,11 +20,11 @@ Setup webcam and canvas - DONE
 Define references for webcam - DONE
 Load facemesh - DONE
 Detect function - DONE
-Drawing utilities
-Load triangulation
-Setup triangle path
-Setup point drawing
-Add drawMesh to detect function
+Drawing utilities - DONE
+Load triangulation - DONE
+Setup triangle path - DONE
+Setup point drawing - DONE
+Add drawMesh to detect function - DONE
 
 # Getting Started with Create React App
 

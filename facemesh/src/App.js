@@ -1,26 +1,32 @@
-import React, {useRef} from 'react';
-import './App.css';
+import React, { useRef, useEffect } from "react";
+import "./App.css";
 import * as tf from "@tensorflow/tfjs";
-import * as facemesh from "@tensorflow-models/facemesh"
+// OLD MODEL
+//import * as facemesh from "@tensorflow-models/facemesh";
+
+// NEW MODEL
+import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
+import { drawMesh } from "./utilities";
 
 function App() {
-  // Setting up references
-  const canvasRef = useRef(null);
   const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
 
-  // Load Facemesh
+  //  Load posenet
   const runFacemesh = async () => {
-    const net = await facemesh.load({
-      inputResolution: {width:640, height:480}, 
-      scale:0.8
-    });
+    // OLD MODEL
+    // const net = await facemesh.load({
+    //   inputResolution: { width: 640, height: 480 },
+    //   scale: 0.8,
+    // });
+    // NEW MODEL
+    const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
     setInterval(() => {
-    detect(net)
-    }, 100)
+      detect(net);
+    }, 10);
   };
 
-  // Detect function
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" &&
@@ -37,49 +43,57 @@ function App() {
       webcamRef.current.video.height = videoHeight;
 
       // Set canvas width
-      canvasRef.current.video.width = videoWidth;
-      canvasRef.current.video.height = videoHeight;
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
 
-      // Make detections
-      const face = await net.estimateFaces(video)
+      // Make Detections
+      // OLD MODEL
+      //       const face = await net.estimateFaces(video);
+      // NEW MODEL
+      const face = await net.estimateFaces({input:video});
       console.log(face);
 
-      // Get canvas context for drawing
+      // Get canvas context
+      const ctx = canvasRef.current.getContext("2d");
+      requestAnimationFrame(()=>{drawMesh(face, ctx)});
     }
   };
 
-  runFacemesh();
+  useEffect(()=>{runFacemesh()}, []);
 
   return (
     <div className="App">
-      <div className="App-header">
-     <Webcam ref={webcamRef} style={
-       {
-         position:"absolute",
-         marginLeft:"auto",
-         marginRight:"auto",
-         left:0,
-         right:0,
-         textAlign:"center",
-         zIndex:9,
-         width:640,
-         height:480,
-       }
-     }  />
-     <canvas ref={canvasRef} style={
-       {
-         position:"absolute",
-         marginLeft:"auto",
-         marginRight:"auto",
-         left:0,
-         right:0,
-         textAlign:"center",
-         zIndex:9,
-         width:640,
-         height:480,
-       }
-     }  />
-     </div>
+      <header className="App-header">
+        <Webcam
+          ref={webcamRef}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            zindex: 9,
+            width: 640,
+            height: 480,
+          }}
+        />
+
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            zindex: 9,
+            width: 640,
+            height: 480,
+          }}
+        />
+      </header>
     </div>
   );
 }
