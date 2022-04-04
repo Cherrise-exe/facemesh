@@ -8,9 +8,9 @@ Facial landmark recognition allows you to detect a number of different points on
 
 # Technologies Used
 
-React
-Javascript
-TensorFlow.JS
+- React
+- Javascript
+- TensorFlow.JS
 
 ## Notes 
 
